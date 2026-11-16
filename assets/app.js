@@ -25,7 +25,7 @@ document.addEventListener('click',e=>{
 const v=e.target.closest('[data-view]');if(v){setView(v.dataset.view);return}
 const tab=e.target.closest('[data-filter]');if(tab){activeFilter=tab.dataset.filter;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));renderFeed();return}
 const like=e.target.closest('[data-like]');if(like){const p=state.posts.find(x=>x.id===like.dataset.like);if(p){p.liked=!p.liked;p.likes+=p.liked?1:-1;save();renderFeed()}return}
-const comment=e.target.closest('[data-comment]');if(comment){commentPost=state.posts.find(x=>x.id===comment.dataset.comment);$('commentList').innerHTML=commentPost.comments.map(c=>'<div class="comment-item"><b>'+esc(c.name)+'</b><p>'+esc(c.text)+'</p></div>').join('')||'<p class="dialog>Be the first to comment.</p>';open('commentsModal');return}
+const comment=e.target.closest('[data-comment]');if(comment){commentPost=state.posts.find(x=>x.id===comment.dataset.comment);$('commentList').innerHTML=commentPost.comments.map(c=>'<div class="comment-item"><b>'+esc(c.name)+'</b><p>'+esc(c.text)+'</p></div>').join('')||'<p>Be the first to comment.</p>';open('commentsModal');return}
 const follow=e.target.closest('[data-follow]');if(follow){const n=follow.dataset.follow;state.following=state.following.includes(n)?state.following.filter(x=>x!==n):[...state.following,n];save();render();return}
 const saveBtn=e.target.closest('[data-save]');if(saveBtn){const p=state.posts.find(x=>x.id===saveBtn.dataset.save);p.saved=!p.saved;save();renderFeed();toast(p.saved?'Post saved':'Post removed from saved');return}
 const topic=e.target.closest('[data-topic]');if(topic){$('globalSearch').value=topic.dataset.topic.replace('#','');renderFeed();return}
