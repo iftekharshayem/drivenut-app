@@ -4,7 +4,7 @@ const SUPABASE_URL='https://cmrrtbzpoetidegjvmyj.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_73dzzExeAVK2S3TzAmyYFg_GDOA8fuV';
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 const $=id=>document.getElementById(id);
-let user=null, profile=null, posts=[], profiles={}, likes=new Set(), saved=new Set(), following=new Set(), followerCount=0, notifications=[], communities=[], communityMembers=new Set(), activeCommunity=null, communityPosts=[], activeFilter='all', activeView='feed', commentPost=null, authMode='signup', comments=[];
+let realtimeChannel=null, user=null, profile=null, posts=[], profiles={}, likes=new Set(), saved=new Set(), following=new Set(), followerCount=0, notifications=[], communities=[], communityMembers=new Set(), activeCommunity=null, communityPosts=[], activeFilter='all', activeView='feed', commentPost=null, authMode='signup', comments=[];
 const drivers=[];
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function initials(n){return String(n||'DN').split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase()||'DN';}
@@ -27,7 +27,27 @@ function profileCompletionPercent(){const checks=[profile?.display_name,profile?
 function startComposer(type='story'){$('postCategory').value=type;$('postImage').value='';$('postImageName').textContent='No image selected';$('postText').value='';$('charCount').textContent='0 / 1200';$('composerTitle').textContent=type==='question'?'Ask the driver community':'Create a post';open('postModal');}
 async function refresh(){try{await loadData();render();}catch(e){console.error(e);toast('Could not load community data: '+(e.message||'Please retry'));}}
 async function ensureProfile(){const {data,error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(error)throw error;if(data){profile=data;return;}const meta=user.user_metadata||{};const row={id:user.id,display_name:meta.display_name||user.email?.split('@')[0]||'Driver',driver_type:meta.driver_type||'Driver',bio:''};const {data:created,error:insertError}=await db.from('profiles').insert(row).select().single();if(insertError)throw insertError;profile=created;}
-async function signedIn(u){user=u;close('authModal');try{await ensureProfile();await refresh();}catch(e){console.error(e);showAuth('login','Account connected, but profile setup failed: '+e.message);}}
+async function signedIn(u){user=u;close('authModal');try{await ensureProfile();await refresh();setupRealtime();}catch(e){console.error(e);showAuth('login','Account connected, but profile setup failed: '+e.message);}}
+function setupRealtime(){
+ if(realtimeChannel){db.removeChannel(realtimeChannel);realtimeChannel=null;}
+ if(!user)return;
+ realtimeChannel=db.channel('drivenut-live-'+user.id)
+  .on('postgres_changes',{event:'INSERT',schema:'public',table:'posts'},payload=>{
+   const p=payload.new||{};
+   refresh();
+   if(p.author_id!==user.id)toast('A new driver post is available.');
+  })
+  .on('postgres_changes',{event:'INSERT',schema:'public',table:'notifications',filter:'recipient_id=eq.'+user.id},payload=>{
+   refresh();
+   const type=payload.new?.notification_type;
+   const message=type==='like'?'Someone liked your post.':type==='comment'?'Someone commented on your post.':type==='follow'?'A driver started following you.':'You have a new notification.';
+   toast(message);
+  })
+  .subscribe(status=>{
+   if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')console.warn('DriveNut live updates unavailable:',status);
+  });
+}
+
 
 $('authSwitch').addEventListener('click',()=>showAuth(authMode==='signup'?'login':'signup'));
 $('authForm').addEventListener('submit',async e=>{e.preventDefault();const email=$('authEmail').value.trim(),password=$('authPassword').value;const btn=$('authSubmit');btn.disabled=true;authMessage('Please wait…');try{if(authMode==='signup'){const display_name=$('authName').value.trim();if(!display_name)throw new Error('Enter a display name.');const {data,error}=await db.auth.signUp({email,password,options:{data:{display_name,driver_type:$('authRole').value}}});if(error)throw error;if(data.session)await signedIn(data.session.user);else authMessage('Account created. Check your email and confirm it, then return here to sign in.');}else{const {data,error}=await db.auth.signInWithPassword({email,password});if(error)throw error;await signedIn(data.user);}}catch(err){authMessage(err.message||'Something went wrong.');}finally{btn.disabled=false;}});
@@ -40,6 +60,6 @@ $('profileForm').addEventListener('submit',async e=>{e.preventDefault();try{cons
 $('communityPostForm')?.addEventListener('submit',async e=>{e.preventDefault();if(!activeCommunity)return;const content=$('communityPostText').value.trim();if(!content)return;try{const {error}=await db.from('community_posts').insert({community_id:activeCommunity,author_id:user.id,content});if(error)throw error;$('communityPostText').value='';close('communityPostModal');const {data, error:loadError}=await db.from('community_posts').select('id,author_id,content,created_at').eq('community_id',activeCommunity).order('created_at',{ascending:false}).limit(100);if(loadError)throw loadError;communityPosts=data||[];render();toast('Community post published.');}catch(err){toast(err.message);}});$('commentForm').addEventListener('submit',async e=>{e.preventDefault();if(!commentPost)return;const content=$('commentText').value.trim();if(!content)return;try{const {error}=await db.from('comments').insert({post_id:commentPost.id,author_id:user.id,content});if(error)throw error;$('commentText').value='';const {data}=await db.from('comments').select('id,author_id,content,created_at').eq('post_id',commentPost.id).order('created_at');comments=data||[];$('commentList').innerHTML=comments.map(c=>'<div class="comment-item"><b>'+esc(nameOf(c.author_id))+'</b><p>'+esc(c.content)+'</p></div>').join('');await refresh();toast('Comment shared.');}catch(err){toast(err.message);}});
 $('globalSearch').addEventListener('input',()=>{if(activeView==='discover')renderDiscover();else if(activeView==='feed'||activeView==='saved'||activeView==='questions')renderFeed();});$('seeTopics').addEventListener('click',()=>toast('Choose a topic to filter the feed.'));
 document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m&&m.id!=='authModal')close(m.id);}));
-$('authSignOut')?.addEventListener('click',async()=>{await db.auth.signOut();user=null;profile=null;close('profileModal');showAuth('login','You have signed out.');});
+$('authSignOut')?.addEventListener('click',async()=>{await db.auth.signOut();if(realtimeChannel){await db.removeChannel(realtimeChannel);realtimeChannel=null;}user=null;profile=null;close('profileModal');showAuth('login','You have signed out.');});
 (async()=>{try{const {data,error}=await db.auth.getSession();if(error)throw error;if(data.session)await signedIn(data.session.user);else showAuth('signup');}catch(e){showAuth('login','Could not connect to Supabase: '+e.message);}})();
 })();
