@@ -21,3 +21,7 @@ drop policy if exists "Users can view their own post reports" on public.post_rep
 create policy "Users can view their own post reports"
 on public.post_reports for select to authenticated
 using (reporter_id = auth.uid());
+
+-- Support the admin moderation queue and post report lookups.
+create index if not exists post_reports_status_created_idx on public.post_reports(status,created_at desc);
+create index if not exists post_reports_post_id_idx on public.post_reports(post_id);
