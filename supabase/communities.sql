@@ -73,3 +73,7 @@ insert into public.communities (name, slug, description) values
 ('Driver Stories','driver-stories','Share experiences, lessons and memorable moments from the road.'),
 ('New Drivers Corner','new-drivers','Ask beginner questions and learn in a welcoming community.')
 on conflict (slug) do nothing;
+
+-- Keep member and discussion lookups responsive as communities grow.
+create index if not exists community_members_user_id_idx on public.community_members(user_id);
+create index if not exists community_posts_recent_idx on public.community_posts(community_id,created_at desc);
