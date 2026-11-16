@@ -71,7 +71,7 @@ The website includes starter Privacy, Terms and Community Guidelines pages. Thes
 - Uploaded profile and post images are stored in a public Supabase Storage bucket. Do not upload private or sensitive images.
 - The feed shows the latest 100 posts for the signed-in member.
 - Realtime behavior should be tested with at least two separate accounts.
-- Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.
+- Admin moderation supports reviewing report status and removing a reported post after an explicit confirmation. It does not suspend accounts or provide a full appeals workflow.
 - The account-deletion interface and Edge Function source are included; the operator must deploy the function and configure its secrets before the control can work.
 - Email confirmation is enabled; new members need to confirm their email before signing in.
 - Before inviting members, test sign-up, email confirmation, sign-in, password recovery, profile editing, post creation/deletion, photo upload, likes, comments, follows, saved posts, communities, notifications and reporting with test accounts.
