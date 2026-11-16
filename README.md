@@ -4,14 +4,14 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 
 ## Features
 
-- Email sign-up, email confirmation and sign-in through Supabase Auth
+- Email sign-up, email confirmation, sign-in, password-reset email and password recovery through Supabase Auth
 - Driver profiles with editable display name, driver type, bio and profile photo
 - Community feed with stories, tips, questions and discussions
-- Create text and photo posts
+- Create text and photo posts, and delete your own posts
 - Like, comment, follow and save posts
 - Discover and search driver profiles
 - Driver communities: join, leave and publish group discussions
-- In-app notifications for likes, comments and follows
+- In-app notifications for likes, comments and follows, with individual and mark-all-as-read controls
 - Realtime feed and notification updates
 - Report posts and an admin-only safety reports dashboard
 - Responsive desktop and mobile layout
@@ -28,6 +28,7 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 - `supabase/realtime.sql` — realtime publication setup
 - `supabase/post_reports.sql` — post-report table and policies
 - `supabase/admin_moderation.sql` — admin-only report review policies
+- Query indexes are included in the core, communities and reports SQL files; rerun those idempotent files to add them to an existing project
 
 ## Supabase setup
 
@@ -54,7 +55,7 @@ Live site: https://iftekharshayem.github.io/drivenut-app/
 - Realtime behavior should be tested with at least two separate accounts.
 - Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.
 - Email confirmation is enabled; new members need to confirm their email before signing in.
-- Before inviting members, test sign-up, email confirmation, sign-in, profile editing, post creation, photo upload, likes, comments, follows, saved posts, communities, notifications and reporting with test accounts.
+- Before inviting members, test sign-up, email confirmation, sign-in, password recovery, profile editing, post creation/deletion, photo upload, likes, comments, follows, saved posts, communities, notifications and reporting with test accounts.
 
 ## Safety and privacy
 
