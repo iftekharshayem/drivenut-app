@@ -28,7 +28,8 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 - `supabase/realtime.sql` — realtime publication setup
 - `supabase/post_reports.sql` — post-report table and policies
 - `supabase/admin_moderation.sql` — admin-only report review policies
-- Query indexes are included in the core, communities and reports SQL files; rerun those idempotent files to add them to an existing project
+- `supabase/performance_indexes.sql` — optional indexes to speed up relationship, community and moderation queries
+- Existing installations can run `supabase/performance_indexes.sql` once to add the performance indexes
 
 ## Supabase setup
 
