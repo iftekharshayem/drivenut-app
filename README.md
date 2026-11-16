@@ -1,52 +1,61 @@
 # DriveNut — The Driver Community
 
-DriveNut is a social community for drivers. It is not a ride-booking or driver-dispatch application.
+DriveNut is a social community for drivers. It is **not** a ride-booking or driver-dispatch application.
 
-## Current features
+## Features
 
-- Supabase email sign-up and sign-in
-- Driver profiles stored in Supabase
-- Shared community feed
-- Create posts as stories, tips, questions, or discussions
-- Like and comment on community posts
-- Follow other driver profiles
-- Save posts to your account
-- Search the visible community feed
-- Browse real driver communities, join or leave groups, and publish group discussions
-- Automatic in-app notifications for likes, comments and follows (after running the notification migration)
+- Email sign-up, email confirmation and sign-in through Supabase Auth
+- Driver profiles with editable display name, driver type, bio and profile photo
+- Community feed with stories, tips, questions and discussions
+- Create text and photo posts
+- Like, comment, follow and save posts
+- Discover and search driver profiles
+- Driver communities: join, leave and publish group discussions
+- In-app notifications for likes, comments and follows
+- Realtime feed and notification updates
+- Report posts and an admin-only safety reports dashboard
 - Responsive desktop and mobile layout
 
 ## Project structure
 
-- `index.html` — application layout and authentication interface
+- `index.html` — app layout and authentication interface
 - `assets/styles.css` — responsive visual design
-- `assets/app.js` — Supabase client and application interactions
-- `supabase/schema.sql` — database schema and row-level security policies
-- `supabase/notifications.sql` — secure database triggers for like, comment, and follow notifications
-- `supabase/communities.sql` — community tables, membership and group-post security policies
+- `assets/app.js` — Supabase client and app interactions
+- `supabase/schema.sql` — core tables and row-level security
+- `supabase/storage.sql` — public media bucket and upload policies
+- `supabase/notifications.sql` — notification triggers
+- `supabase/communities.sql` — community tables and policies
+- `supabase/realtime.sql` — realtime publication setup
+- `supabase/post_reports.sql` — post-report table and policies
+- `supabase/admin_moderation.sql` — admin-only report review policies
 
-## Supabase configuration
+## Supabase setup
 
-The browser app uses the Supabase project URL and **publishable** key. A publishable key is intended for client-side use; database access must remain protected by Row Level Security (RLS).
+1. Create a Supabase project.
+2. Run the SQL files in `supabase/` in the SQL Editor. Run each migration once; the scripts are designed to be safe to re-run where practical.
+3. In Authentication settings, enable email sign-up and configure the Site URL and Redirect URL to the deployed GitHub Pages address.
+4. The browser app uses the Supabase project URL and **publishable** key. Publishable keys are intended for client-side use; database access must be protected by Row Level Security (RLS).
+5. Never place a Supabase secret key or `service_role` key in this repository or browser code.
 
-**Never put a Supabase secret key or service_role key in this repository or browser code.**
+### Admin access
 
-Email confirmation is enabled in the current project. New members must confirm their email before signing in.
+The safety dashboard checks the trusted Supabase Auth `app_metadata.role` claim for the value `admin`. Set this claim only through a trusted Supabase administrator process (for example, the SQL Editor updating `auth.users.raw_app_meta_data`). Never let users assign their own admin role through profile fields or `user_metadata`. After changing the claim, the admin must sign out and sign in again to refresh the JWT.
 
 ## Deployment
 
-GitHub Pages hosts this static application. The repository includes `.github/workflows/deploy.yml`. In **Settings → Pages**, choose **GitHub Actions** as the source. Each push to `main` triggers a deployment. Confirm a green check in the Actions tab before sharing the Pages URL.
+GitHub Pages hosts the static application. The repository includes `.github/workflows/deploy.yml`. In **Settings → Pages**, select **GitHub Actions** as the source. Every push to `main` triggers a deployment. Check the Actions tab for a successful **Deploy DriveNut to GitHub Pages** run.
 
-## Current limitations
+Live site: https://iftekharshayem.github.io/drivenut-app/
 
-- Photo uploads are not enabled yet.
-- Run `supabase/notifications.sql` once in Supabase SQL Editor to enable automatic like, comment, and follow notifications.
-- Run `supabase/communities.sql` once in Supabase SQL Editor to enable group membership and discussions.
-- Photo uploads and profile avatar uploads are not enabled yet.
-- Admin moderation tools and reporting workflows are not enabled yet.
-- The initial sample/demo posts are not automatically inserted into the shared database. The feed starts with real member posts.
-- This is an early implementation. Test account creation, email confirmation, posting, comments, likes, follows, saved posts, and notifications before inviting other people.
+## Important limitations and launch checks
+
+- Uploaded profile and post images are stored in a public Supabase Storage bucket. Do not upload private or sensitive images.
+- The feed shows the latest 100 posts for the signed-in member.
+- Realtime behavior should be tested with at least two separate accounts.
+- Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.
+- Email confirmation is enabled; new members need to confirm their email before signing in.
+- Before inviting members, test sign-up, email confirmation, sign-in, profile editing, post creation, photo upload, likes, comments, follows, saved posts, communities, notifications and reporting with test accounts.
 
 ## Safety and privacy
 
-Use a display name rather than private contact information. Do not post passwords, identity documents, private addresses, or other sensitive information.
+Use a display name rather than private contact information. Do not post passwords, identity documents, private addresses or other sensitive information. Treat all public posts and uploaded media as visible to other people.
