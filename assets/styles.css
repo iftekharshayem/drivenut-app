@@ -94,3 +94,38 @@ body{background:radial-gradient(ellipse at 78% 0%,rgba(216,239,181,.22),transpar
 
 
 .admin-toolbar{display:flex;flex-direction:column;gap:12px;padding:14px 16px;background:#fff;border:1px solid #e8eee8;border-radius:14px;margin-bottom:14px}.admin-counts{display:flex;flex-wrap:wrap;gap:8px}.admin-counts span{font-size:10px;color:#718075;background:#f4f7f2;border-radius:8px;padding:7px 9px}.admin-counts b{color:#244536;margin-left:4px}.admin-filter-label{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:800;color:#526258}.admin-filter-label select{border:1px solid #dfe8df;border-radius:8px;padding:8px 10px;background:#fff;color:#244536;font:inherit;max-width:190px}.admin-report h3{text-transform:capitalize}.admin-report-actions button:focus-visible,.admin-filter-label select:focus-visible{outline:2px solid #638a5e;outline-offset:2px}@media(min-width:720px){.admin-toolbar{flex-direction:row;align-items:center;justify-content:space-between}.admin-counts{gap:6px}}
+
+
+/* DriveNut UI refresh — refined surfaces, hierarchy and responsive polish */
+:root{--forest:#123d31;--forest2:#1c5945;--lime:#d9f27a;--ink:#14251e;--muted:#718078;--line:#e5ece6;--paper:#f3f6f2}
+body{background:radial-gradient(ellipse at 82% 0%,#e8f0e3 0,transparent 34%),var(--paper);color:var(--ink);letter-spacing:.005em}
+button{transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #9bc66c;outline-offset:2px}
+.sidebar{background:rgba(255,255,255,.94);box-shadow:8px 0 35px #163d2b08;padding-top:30px}
+.brand{margin-bottom:46px}.brand-mark{box-shadow:0 5px 14px #8eae4a35}
+.nav-item{min-height:44px;border-radius:12px}.nav-item:hover{background:#f2f6ef;color:var(--forest);transform:translateX(2px)}.nav-item.active{background:linear-gradient(100deg,#eaf3e5,#f3f7ed);box-shadow:inset 3px 0 #82aa4b}
+.topbar{background:rgba(255,255,255,.88);box-shadow:0 5px 22px #183b2b08}
+.search-wrap{border-radius:14px;background:#f7f9f6;transition:border-color .2s,box-shadow .2s}.search-wrap:focus-within{border-color:#9fbd86;box-shadow:0 0 0 3px #9fbd8624}
+.content-layout{padding-top:38px;gap:30px}
+.welcome-row h1{font-size:clamp(25px,3vw,32px);letter-spacing:-1.25px}.welcome-row p{font-size:13px}
+.online-pill{padding:8px 13px;background:#f4f8ed}
+.feed-tabs{gap:25px}.tab{font-size:12px;padding-bottom:14px}.tab:hover{color:var(--forest)}
+.card,.side-card,.post-card{border-color:#e6ece6;border-radius:18px;box-shadow:0 10px 32px #183b2b0a}
+.composer{padding:19px 20px 13px}.composer-prompt{border:1px solid transparent;background:#f4f7f3;height:44px;padding:0 16px}.composer-prompt:hover{background:#edf3eb;border-color:#e2ebdd}
+.composer-actions{margin-top:14px}.composer-actions button:not(.post-button){border-radius:9px;padding:8px 9px}.composer-actions button:not(.post-button):hover{background:#f1f5ef;color:var(--forest)}
+.post-button{border-radius:11px;padding:11px 17px;box-shadow:0 5px 13px #123d3118}.post-button:hover{background:#245b46;transform:translateY(-1px);box-shadow:0 8px 17px #123d3124}
+.section-line{margin-top:27px}.post-card{padding:19px 20px}.post-card:hover{box-shadow:0 13px 34px #183b2b10}
+.side-card{overflow:hidden}.profile-cover{background:linear-gradient(125deg,#123d31,#28604a 58%,#8eaa53);min-height:83px}.profile-summary{padding-left:19px;padding-right:19px}.profile-avatar{border:4px solid white;box-shadow:0 3px 12px #10251f1a}
+.outline-btn{border:1px solid #dbe6d9;border-radius:11px;color:var(--forest);background:#f9fbf8;padding:10px;font-weight:800}.outline-btn:hover{background:#edf4e9;border-color:#b9cfaa}
+.topic-row,.suggested{padding-top:11px;padding-bottom:11px}
+.modal-backdrop{background:#0b2119a8;backdrop-filter:blur(7px);padding:20px}
+.dialog{border:1px solid #e6ede6;border-radius:22px;box-shadow:0 24px 80px #071b1460;padding:29px}
+.dialog h2{font-size:23px;letter-spacing:-.7px}.dialog input:not([type=file]),.dialog textarea,.dialog select{border:1px solid #e2e9e2;border-radius:11px;background:#fafcf9;padding:12px 13px;transition:border-color .2s,box-shadow .2s}.dialog input:focus,.dialog textarea:focus,.dialog select:focus{border-color:#91b579;box-shadow:0 0 0 3px #91b57924;outline:0}
+.dialog textarea{min-height:112px;resize:vertical}.dialog-close{border-radius:10px;background:#f2f6f1}.dialog-close:hover{background:#e7efe3;color:var(--forest)}
+.empty-state{border:1px dashed #d9e4d8;border-radius:18px;background:#fbfcfa;padding:35px 20px}
+.toast{border-radius:12px;box-shadow:0 12px 32px #0b211933}
+.admin-toolbar{border-radius:16px}
+@media(max-width:1100px){.content-layout{padding-left:27px;padding-right:27px;grid-template-columns:minmax(0,1fr) 260px;gap:20px}.topbar{padding:0 27px}}
+@media(max-width:850px){.sidebar{display:none}.main-area{margin-left:0}.topbar{height:66px;padding:0 18px}.content-layout{display:block;padding:25px 18px 95px}.right-column{display:none}.welcome-row{align-items:flex-start}.welcome-row h1{font-size:25px}.online-pill{font-size:8px}.mobile-nav{background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-top:1px solid #e4ebe4;box-shadow:0 -8px 28px #183b2b0b;padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}.mobile-nav button{border-radius:12px;min-width:0;padding:6px 3px;color:#7d8a81}.mobile-nav button.active{background:#edf4e8;color:var(--forest)}.mobile-nav button small{font-size:9px;font-weight:700}.feed-tabs{gap:21px}}
+@media(max-width:520px){.content-layout{padding:20px 12px 100px}.topbar{padding:0 12px;gap:10px}.search-wrap{width:auto;flex:1;height:39px}.top-actions{gap:7px}.profile-chip{padding:0}.profile-chip>span:not(.avatar){display:none}.icon-btn{width:35px;height:35px}.welcome-row{display:block;margin-bottom:17px}.online-pill{display:inline-block;margin-top:12px}.welcome-row h1{font-size:23px}.composer{padding:14px 13px 10px}.composer-actions{margin-left:0;gap:3px;flex-wrap:wrap}.composer-actions button{font-size:10px}.composer-actions button span{display:inline}.composer-actions .post-button{margin-left:auto}.post-card{padding:15px 14px}.dialog{padding:24px 18px;border-radius:19px;max-height:88vh;overflow:auto}.dialog h2{font-size:21px}.feed-tabs{gap:18px}.section-line{margin-top:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
