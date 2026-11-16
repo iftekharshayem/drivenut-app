@@ -125,3 +125,6 @@ create policy "Users mark own notifications read" on public.notifications for up
 
 -- Note: Supabase Auth must be configured before the tables can be used by real members.
 -- Never expose a Supabase service_role key in browser code.
+-- Query-performance indexes for feed and relationship lookups.
+create index if not exists follows_followed_id_idx on public.follows(followed_id);
+create index if not exists post_likes_user_id_idx on public.post_likes(user_id);
