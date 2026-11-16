@@ -43,14 +43,9 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 
 ### Account deletion setup
 
-The profile editor includes a permanent account-deletion flow. To activate it, deploy the `delete-account` Supabase Edge Function and configure its server-side secrets. From a trusted terminal with the Supabase CLI linked to this project, run:
+The profile editor includes a permanent account-deletion flow. Deploy `supabase/functions/delete-account/index.ts` as the `delete-account` Supabase Edge Function. Supabase-hosted Edge Functions receive the project URL and platform API-key environment variables automatically; do **not** try to create custom secrets whose names start with `SUPABASE_` (that prefix is reserved by the platform). In the Supabase Dashboard, confirm the function is deployed and that the platform-provided legacy `SUPABASE_SERVICE_ROLE_KEY` is available to the function runtime. If your project has migrated to the newer named API keys, update the function to read `SUPABASE_SECRET_KEYS` and select the intended server key before relying on account deletion.
 
-```sh
-supabase secrets set SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co SUPABASE_ANON_KEY=YOUR_PUBLISHABLE_OR_ANON_KEY SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_SECRET
-supabase functions deploy delete-account
-```
-
-Use the project's actual URL and keys in your private terminal only. The service-role secret must remain in Supabase Edge Function secrets and must never be placed in this repository or browser code. The function verifies the caller's session, requires an explicit `DELETE` confirmation, removes files under that user's storage folder, then deletes the Auth user so foreign-key cascades remove account-linked database records. If media cleanup fails, it stops before deleting the account. Review this behavior and backups before enabling it for real members.
+The service-role/secret key must remain server-side and must never be placed in this repository, browser code, screenshots, or chat. The function verifies the caller's session, requires an explicit `DELETE` confirmation, removes files under that user's storage folder, then deletes the Auth user so foreign-key cascades remove account-linked database records. If media cleanup fails, it stops before deleting the account. Review this behavior and backups before enabling it for real members.
 
 ## Admin access
 
