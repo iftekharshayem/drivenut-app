@@ -12,6 +12,8 @@ DriveNut is a social community for drivers. It is not a ride-booking or driver-d
 - Follow other driver profiles
 - Save posts to your account
 - Search the visible community feed
+- Browse real driver communities, join or leave groups, and publish group discussions
+- Automatic in-app notifications for likes, comments and follows (after running the notification migration)
 - Responsive desktop and mobile layout
 
 ## Project structure
@@ -21,6 +23,7 @@ DriveNut is a social community for drivers. It is not a ride-booking or driver-d
 - `assets/app.js` — Supabase client and application interactions
 - `supabase/schema.sql` — database schema and row-level security policies
 - `supabase/notifications.sql` — secure database triggers for like, comment, and follow notifications
+- `supabase/communities.sql` — community tables, membership and group-post security policies
 
 ## Supabase configuration
 
@@ -38,8 +41,9 @@ GitHub Pages hosts this static application. The repository includes `.github/wor
 
 - Photo uploads are not enabled yet.
 - Run `supabase/notifications.sql` once in Supabase SQL Editor to enable automatic like, comment, and follow notifications.
-- Communities are currently informational placeholders, not full group discussion spaces.
+- Run `supabase/communities.sql` once in Supabase SQL Editor to enable group membership and discussions.
 - Photo uploads and profile avatar uploads are not enabled yet.
+- Admin moderation tools and reporting workflows are not enabled yet.
 - The initial sample/demo posts are not automatically inserted into the shared database. The feed starts with real member posts.
 - This is an early implementation. Test account creation, email confirmation, posting, comments, likes, follows, saved posts, and notifications before inviting other people.
 
