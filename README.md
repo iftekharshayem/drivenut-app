@@ -28,7 +28,8 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 - `supabase/realtime.sql` — realtime publication setup
 - `supabase/post_reports.sql` — post-report table and policies
 - `supabase/admin_moderation.sql` — admin-only report review policies
-- `supabase/performance_indexes.sql` — optional indexes to speed up relationship, community and moderation queries\n- `privacy.html`, `terms.html`, `community-guidelines.html` — public-facing policy and safety pages
+- `supabase/performance_indexes.sql` — optional indexes to speed up relationship, community and moderation queries
+- `supabase/functions/delete-account/index.ts` — authenticated account deletion Edge Function\n- `privacy.html`, `terms.html`, `community-guidelines.html` — public-facing policy and safety pages
 - Existing installations can run `supabase/performance_indexes.sql` once to add the performance indexes
 
 ## Supabase setup
@@ -39,7 +40,18 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 4. The browser app uses the Supabase project URL and **publishable** key. Publishable keys are intended for client-side use; database access must be protected by Row Level Security (RLS).
 5. Never place a Supabase secret key or `service_role` key in this repository or browser code.
 
-### Admin access
+### Account deletion setup
+
+The profile editor includes a permanent account-deletion flow. To activate it, deploy the `delete-account` Supabase Edge Function and configure its server-side secrets. From a trusted terminal with the Supabase CLI linked to this project, run:
+
+```sh
+supabase secrets set SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co SUPABASE_ANON_KEY=YOUR_PUBLISHABLE_OR_ANON_KEY SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_SECRET
+supabase functions deploy delete-account
+```
+
+Use the project's actual URL and keys in your private terminal only. The service-role secret must remain in Supabase Edge Function secrets and must never be placed in this repository or browser code. The function verifies the caller's session, requires an explicit `DELETE` confirmation, removes files under that user's storage folder, then deletes the Auth user so foreign-key cascades remove account-linked database records. If media cleanup fails, it stops before deleting the account. Review this behavior and backups before enabling it for real members.
+
+## Admin access
 
 The safety dashboard checks the trusted Supabase Auth `app_metadata.role` claim for the value `admin`. Set this claim only through a trusted Supabase administrator process (for example, the SQL Editor updating `auth.users.raw_app_meta_data`). Never let users assign their own admin role through profile fields or `user_metadata`. After changing the claim, the admin must sign out and sign in again to refresh the JWT.
 
@@ -54,7 +66,7 @@ Live site: https://iftekharshayem.github.io/drivenut-app/
 - Uploaded profile and post images are stored in a public Supabase Storage bucket. Do not upload private or sensitive images.
 - The feed shows the latest 100 posts for the signed-in member.
 - Realtime behavior should be tested with at least two separate accounts.
-- Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.\n- A complete self-service account deletion flow is not implemented yet.
+- Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.\n- The account-deletion interface and Edge Function source are included; the operator must deploy the function and configure its secrets before the control can work.
 - Email confirmation is enabled; new members need to confirm their email before signing in.
 - Before inviting members, test sign-up, email confirmation, sign-in, password recovery, profile editing, post creation/deletion, photo upload, likes, comments, follows, saved posts, communities, notifications and reporting with test accounts.
 
