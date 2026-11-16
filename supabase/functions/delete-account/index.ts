@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://iftekharshayem.github.io",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
@@ -52,13 +52,22 @@ Deno.serve(async (req) => {
   // Remove this user's public media before deleting the auth user.
   // The bucket is public, but the storage policies keep each user's files in their own UUID folder.
   async function collectFiles(prefix: string): Promise<string[]> {
-    const { data, error } = await admin.storage.from("drivenut-media").list(prefix, { limit: 1000 });
-    if (error) throw error;
     const files: string[] = [];
-    for (const item of data || []) {
-      const path = prefix ? prefix + "/" + item.name : item.name;
-      if (item.id === null) files.push(...await collectFiles(path));
-      else files.push(path);
+    // Paginate so accounts with more than 1,000 objects are fully covered.
+    for (let offset = 0; ; offset += 1000) {
+      const { data, error } = await admin.storage.from("drivenut-media").list(prefix, {
+        limit: 1000,
+        offset,
+        sortBy: { column: "name", order: "asc" },
+      });
+      if (error) throw error;
+      const items = data || [];
+      for (const item of items) {
+        const path = prefix ? prefix + "/" + item.name : item.name;
+        if (item.id === null) files.push(...await collectFiles(path));
+        else files.push(path);
+      }
+      if (items.length < 1000) break;
     }
     return files;
   }
