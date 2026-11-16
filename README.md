@@ -29,7 +29,8 @@ DriveNut is a social community for drivers. It is **not** a ride-booking or driv
 - `supabase/post_reports.sql` — post-report table and policies
 - `supabase/admin_moderation.sql` — admin-only report review policies
 - `supabase/performance_indexes.sql` — optional indexes to speed up relationship, community and moderation queries
-- `supabase/functions/delete-account/index.ts` — authenticated account deletion Edge Function\n- `privacy.html`, `terms.html`, `community-guidelines.html` — public-facing policy and safety pages
+- `supabase/functions/delete-account/index.ts` — authenticated account deletion Edge Function
+- `privacy.html`, `terms.html`, `community-guidelines.html` — public-facing policy and safety pages
 - Existing installations can run `supabase/performance_indexes.sql` once to add the performance indexes
 
 ## Supabase setup
@@ -61,12 +62,17 @@ GitHub Pages hosts the static application. The repository includes `.github/work
 
 Live site: https://iftekharshayem.github.io/drivenut-app/
 
-## Public policies and launch readiness\n\nThe website includes starter Privacy, Terms and Community Guidelines pages. These are plain-language product drafts, not legal advice. Before public launch, the operator must obtain jurisdiction-specific legal review, publish a real privacy/support contact, confirm age and eligibility requirements, and implement a complete account-deletion process.\n\n## Important limitations and launch checks
+## Public policies and launch readiness
+
+The website includes starter Privacy, Terms and Community Guidelines pages. These are plain-language product drafts, not legal advice. Before public launch, the operator must obtain jurisdiction-specific legal review, publish a real privacy/support contact, confirm age and eligibility requirements, and implement a complete account-deletion process.
+
+## Important limitations and launch checks
 
 - Uploaded profile and post images are stored in a public Supabase Storage bucket. Do not upload private or sensitive images.
 - The feed shows the latest 100 posts for the signed-in member.
 - Realtime behavior should be tested with at least two separate accounts.
-- Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.\n- The account-deletion interface and Edge Function source are included; the operator must deploy the function and configure its secrets before the control can work.
+- Admin moderation currently reviews reports and updates report status. It does not automatically remove posts, suspend accounts or provide a full appeals workflow.
+- The account-deletion interface and Edge Function source are included; the operator must deploy the function and configure its secrets before the control can work.
 - Email confirmation is enabled; new members need to confirm their email before signing in.
 - Before inviting members, test sign-up, email confirmation, sign-in, password recovery, profile editing, post creation/deletion, photo upload, likes, comments, follows, saved posts, communities, notifications and reporting with test accounts.
 
