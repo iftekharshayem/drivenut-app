@@ -1,32 +1,42 @@
-# DriveNut
+# DriveNut — The Driver Community
 
-A mobile-friendly rider/driver connection project. This repository currently contains a front-end preview and the first Supabase database schema.
+DriveNut is a social community concept for drivers. It is not a ride-booking or driver-dispatch application.
+
+## Community features in this first UI build
+
+- Community feed with sample driver posts
+- Create posts as stories, tips, questions, or discussions
+- Like and comment on posts
+- Follow suggested community members
+- Search the visible feed
+- Save posts
+- Edit a local demo profile
+- Responsive desktop and mobile layout
 
 ## Project structure
 
-- `index.html` — app entry page
-- `assets/styles.css` — responsive UI styles
-- `assets/app.js` — browser-side demo interactions
-- `supabase/schema.sql` — initial PostgreSQL schema and row-level security policies
+- `index.html` — community application layout
+- `assets/styles.css` — responsive visual design
+- `assets/app.js` — front-end demo interactions
+- `supabase/schema.sql` — initial Supabase/PostgreSQL schema for profiles, posts, comments, likes, follows, saved posts, and notifications
 
-## Run locally
+## Preview
 
-Open `index.html` in a browser, or serve this folder with any static web server.
+Enable GitHub Pages in **Settings → Pages**:
+1. Choose **Deploy from a branch**.
+2. Select `main` and `/(root)`.
+3. Save and wait for the published URL.
 
-## Publish a preview with GitHub Pages
+## Current implementation status
 
-1. Open the repository **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **main** and folder **/(root)**, then Save.
-4. Wait for GitHub Pages to publish the site; the Pages section will show its URL.
+The current browser build is a front-end prototype. Demo posts and interactions are stored only in the current browser's local storage. They are not shared between different users or devices. The suggested profiles and sample posts are demonstration content.
 
-## Backend setup (next integration step)
+The Supabase schema is a database foundation only. Supabase is not yet connected to the website, and real sign-up, sign-in, shared posts, cloud image uploads, notifications, and cross-device follow/like/comment are not live yet.
 
-1. Create a Supabase project.
-2. Open **SQL Editor** and run `supabase/schema.sql`.
-3. Configure Supabase Auth and decide which sign-in method to enable.
-4. Add the Supabase project URL and public anon key to the front-end integration when ready. Never put a service-role key in browser code.
+## Authentication note
 
-## Important status
+A secure username-and-password-only sign-in needs a trusted server-side authentication flow; do not store raw passwords in browser storage or create a fake login. The project can use a secure supported Supabase Auth flow while presenting a username as the public identity. Do not put a Supabase service-role key in front-end code.
 
-The current ride and join forms are a local browser demo. They do not contact drivers, send registrations to a server, or provide real authentication. The SQL file is a starting database foundation; Supabase credentials and application integration are not configured yet. Do not use this preview for real rides or sensitive personal information.
+## Safety and privacy
+
+Use sample information in this preview. Do not post private contact details, passwords, identity documents, or sensitive personal information.
