@@ -1,42 +1,47 @@
 # DriveNut — The Driver Community
 
-DriveNut is a social community concept for drivers. It is not a ride-booking or driver-dispatch application.
+DriveNut is a social community for drivers. It is not a ride-booking or driver-dispatch application.
 
-## Community features in this first UI build
+## Current features
 
-- Community feed with sample driver posts
+- Supabase email sign-up and sign-in
+- Driver profiles stored in Supabase
+- Shared community feed
 - Create posts as stories, tips, questions, or discussions
-- Like and comment on posts
-- Follow suggested community members
-- Search the visible feed
-- Save posts
-- Edit a local demo profile
+- Like and comment on community posts
+- Follow other driver profiles
+- Save posts to your account
+- Search the visible community feed
 - Responsive desktop and mobile layout
 
 ## Project structure
 
-- `index.html` — community application layout
+- `index.html` — application layout and authentication interface
 - `assets/styles.css` — responsive visual design
-- `assets/app.js` — front-end demo interactions
-- `supabase/schema.sql` — initial Supabase/PostgreSQL schema for profiles, posts, comments, likes, follows, saved posts, and notifications
+- `assets/app.js` — Supabase client and application interactions
+- `supabase/schema.sql` — database schema and row-level security policies
 
-## Preview
+## Supabase configuration
 
-Enable GitHub Pages in **Settings → Pages**:
-1. Choose **Deploy from a branch**.
-2. Select `main` and `/(root)`.
-3. Save and wait for the published URL.
+The browser app uses the Supabase project URL and **publishable** key. A publishable key is intended for client-side use; database access must remain protected by Row Level Security (RLS).
 
-## Current implementation status
+**Never put a Supabase secret key or service_role key in this repository or browser code.**
 
-The current browser build is a front-end prototype. Demo posts and interactions are stored only in the current browser's local storage. They are not shared between different users or devices. The suggested profiles and sample posts are demonstration content.
+Email confirmation is enabled in the current project. New members must confirm their email before signing in.
 
-The Supabase schema is a database foundation only. Supabase is not yet connected to the website, and real sign-up, sign-in, shared posts, cloud image uploads, notifications, and cross-device follow/like/comment are not live yet.
+## Deployment
 
-## Authentication note
+GitHub Pages can host this static application. In **Settings → Pages**, select **Deploy from a branch**, choose `main` and `/(root)`, then save. Wait for the deployment to finish before sharing the Pages URL.
 
-A secure username-and-password-only sign-in needs a trusted server-side authentication flow; do not store raw passwords in browser storage or create a fake login. The project can use a secure supported Supabase Auth flow while presenting a username as the public identity. Do not put a Supabase service-role key in front-end code.
+## Current limitations
+
+- Photo uploads are not enabled yet.
+- Notifications are a placeholder and are not generated yet.
+- Communities are currently informational placeholders, not full group discussion spaces.
+- Followers and profile statistics are basic; follower counts are not yet calculated.
+- The initial sample/demo posts are not automatically inserted into the shared database. The feed starts with real member posts.
+- This is an early implementation. Test account creation, email confirmation, posting, comments, likes, follows and saved posts before inviting other people.
 
 ## Safety and privacy
 
-Use sample information in this preview. Do not post private contact details, passwords, identity documents, or sensitive personal information.
+Use a display name rather than private contact information. Do not post passwords, identity documents, private addresses, or other sensitive information.
