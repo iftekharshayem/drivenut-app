@@ -75,3 +75,5 @@ body{background:radial-gradient(ellipse at 78% 0%,rgba(216,239,181,.22),transpar
  #authModal .dialog h2{font-size:23px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.notification-card{cursor:pointer}.notification-card.unread{border-left:3px solid #8eae59;background:linear-gradient(100deg,#fbfdf8,#fff)}.notification-card .role-tag{white-space:nowrap}
