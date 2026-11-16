@@ -77,3 +77,6 @@ body{background:radial-gradient(ellipse at 78% 0%,rgba(216,239,181,.22),transpar
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 .notification-card{cursor:pointer}.notification-card.unread{border-left:3px solid #8eae59;background:linear-gradient(100deg,#fbfdf8,#fff)}.notification-card .role-tag{white-space:nowrap}
+
+/* Driver discovery and public profile */
+.driver-card-actions{display:flex;justify-content:flex-end;border-top:1px solid #eef1ec;margin-top:10px;padding-top:7px}.public-profile-heading{display:flex;align-items:center;gap:13px;margin:18px 0}.public-profile-avatar{width:58px;height:58px;font-size:17px}.public-profile-heading h2{margin:0;font-size:20px}.public-profile-heading p{margin:3px 0 0;color:#849087;font-size:11px}.public-profile-bio{background:#f5f8f2;border-radius:12px;padding:13px;color:#526157;font-size:12px;line-height:1.7;overflow-wrap:anywhere}.public-profile-stats{display:flex;justify-content:center;padding:13px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:12px 0}.public-profile-stats b,.public-profile-stats small{display:block;text-align:center}.public-profile-stats b{font:800 18px Manrope}.public-profile-stats small{font-size:9px;color:#8b978e}.public-profile-dialog .full{width:100%;margin-top:12px}
