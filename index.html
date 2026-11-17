@@ -11,21 +11,11 @@
 <title>DriveNut — The Driver Community</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20261117-brand-splash">
+<link rel="stylesheet" href="assets/styles.css?v=20261117-simple-logo">
 </head>
 <body>
 <div id="brandSplash" class="brand-splash" role="status" aria-label="DriveNut is starting">
- <div class="splash-lockup">
-  <svg class="splash-emblem" viewBox="0 0 220 180" aria-hidden="true">
-   <path class="splash-d" d="M48 38 H112 C151 38 177 61 177 90 C177 119 151 142 112 142 H48 Z"/>
-   <polygon class="splash-nut" points="132,7 160,23 160,55 132,71 104,55 104,23"/>
-   <circle class="splash-nut-hole" cx="132" cy="39" r="11"/>
-   <path class="splash-road" d="M132 77 V121"/>
-  </svg>
-  <div class="splash-wordmark">Drive<span>Nut</span></div>
-  <div class="splash-tagline">THE DRIVER COMMUNITY</div>
-  <div class="splash-loader"><i></i></div>
- </div>
+ <div class="splash-original-brand"><span class="brand-mark">D</span><span class="splash-original-name">Drive<span>Nut</span><small>THE DRIVER COMMUNITY</small></span></div>
 </div>
 <div class="app-shell">
 <aside class="sidebar">
@@ -77,6 +67,6 @@
 <div class="toast" id="toast" role="status"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/app.js?v=20261117-email-otp" defer></script>
 <script>
-(()=>{const splash=document.getElementById('brandSplash');if(!splash)return;const hide=()=>{splash.classList.add('splash-out');setTimeout(()=>splash.remove(),650);};if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(hide,450);}else{setTimeout(hide,2050);}})();
+(()=>{const splash=document.getElementById('brandSplash');if(!splash)return;const hide=()=>{splash.classList.add('splash-out');setTimeout(()=>splash.remove(),650);};if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(hide,3000);}else{setTimeout(hide,3000);}})();
 </script>
 </body></html>
