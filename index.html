@@ -11,12 +11,9 @@
 <title>DriveNut — The Driver Community</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20261117-simple-logo">
+<link rel="stylesheet" href="assets/styles.css?v=20261117-original">
 </head>
 <body>
-<div id="brandSplash" class="brand-splash" role="status" aria-label="DriveNut">
- <span class="brand-mark splash-big-mark" aria-hidden="true">D</span>
-</div>
 <div class="app-shell">
 <aside class="sidebar">
  <a class="brand" href="#"><span class="brand-mark">D</span><span>Drive<span class="brand-accent">Nut</span><small>THE DRIVER COMMUNITY</small></span></a>
@@ -66,7 +63,4 @@
 <div class="modal-backdrop hidden" id="reportModal"><section class="dialog"><button class="dialog-close" data-close="reportModal">×</button><div class="dialog-kicker">HELP KEEP DRIVENUT SAFE</div><h2>Report this post</h2><p id="reportPostId">Post selected</p><form id="reportForm"><label for="reportReason">WHY ARE YOU REPORTING THIS?</label><select id="reportReason" required><option value="spam">Spam or misleading content</option><option value="harassment">Harassment or bullying</option><option value="unsafe">Unsafe or harmful advice</option><option value="inappropriate">Inappropriate content</option><option value="other">Something else</option></select><label for="reportDetails">MORE DETAILS (OPTIONAL)</label><textarea id="reportDetails" maxlength="500" placeholder="Add context to help the review..."></textarea><div class="dialog-actions"><span>Your report is private.</span><button class="post-button" type="submit">Submit report</button></div></form></section></div>
 <div class="toast" id="toast" role="status"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/app.js?v=20261117-email-otp" defer></script>
-<script>
-(()=>{const splash=document.getElementById('brandSplash');if(!splash)return;const hide=()=>{splash.classList.add('splash-out');setTimeout(()=>splash.remove(),650);};if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(hide,3000);}else{setTimeout(hide,3000);}})();
-</script>
 </body></html>
