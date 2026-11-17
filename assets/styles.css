@@ -204,3 +204,21 @@ body{background:#eef3ee}
 .composer-prompt{font-size:11px}
 @media(max-width:850px){.rider-tools{grid-template-columns:1fr;gap:9px}.rider-tool{padding:12px 13px}.tool-icon{flex-basis:34px;height:34px}.rider-how{gap:7px;margin-bottom:18px}}
 @media(max-width:520px){.hero-platforms{margin-top:12px}.rider-tool b{font-size:10px}.rider-tool small{font-size:9px}.rider-how{font-size:9px;padding:11px 12px}}
+
+/* Rider route reports */
+.route-report-cta{margin:0 0 16px;padding:11px 15px;font-size:11px}
+.route-results-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.route-results-head b,.route-results-head small{display:block}
+.route-results-head b{font:800 13px Manrope;color:var(--ink)}
+.route-results-head small{font-size:9px;color:var(--muted);margin-top:4px}
+.route-report-card{border-left:3px solid #8daf58}
+.route-card-top,.route-card-foot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.route-card-top>small,.route-card-foot{font-size:9px;color:#89968d}
+.route-report-card h3{font:800 15px Manrope;color:var(--forest);margin:12px 0 5px;overflow-wrap:anywhere}
+.route-report-card h3 span{color:#8daf58;padding:0 4px}
+.route-card-meta{font-size:9px;color:#87958b}
+.route-impact{display:inline-block;background:#f1f6ec;color:#557a3b;border-radius:7px;padding:6px 9px;font-size:9px;font-weight:700}
+.route-impact small{font-weight:500;color:#819078}
+.route-card-foot{border-top:1px solid var(--line);padding-top:10px;margin-top:12px;flex-wrap:wrap}
+.route-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.route-form-grid{grid-template-columns:1fr}.route-results-head{align-items:flex-start}.route-results-head .post-button{white-space:nowrap}.mobile-nav button{padding-left:8px;padding-right:8px}}
