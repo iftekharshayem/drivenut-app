@@ -221,3 +221,9 @@ body{background:#eef3ee}
 .splash-original-name>span span{color:#d7f17a}
 .splash-original-name small{margin-top:7px;color:#c2d7c7;font:700 8px "DM Sans",sans-serif;letter-spacing:2px}
 @media(max-width:420px){.splash-original-brand .brand-mark{width:50px;height:50px;font-size:30px}.splash-original-name{font-size:29px}}
+
+/* Facebook-style brand-only opening screen */
+.brand-splash{background:#123d30;display:grid;place-items:center}
+.splash-original-brand{display:none!important}
+.splash-big-mark{width:112px;height:112px;border-radius:32px;font:900 76px Manrope,sans-serif;box-shadow:0 16px 42px #061b1470}
+@media(max-width:520px){.splash-big-mark{width:104px;height:104px;border-radius:29px;font-size:70px}}
