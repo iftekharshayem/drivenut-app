@@ -210,3 +210,14 @@ body{background:#eef3ee}
 @keyframes splash-word-in{to{opacity:1;transform:translateY(0)}}
 @keyframes splash-load{0%{transform:translateX(-120%)}100%{transform:translateX(270%)}}
 @media(prefers-reduced-motion:reduce){.splash-d,.splash-nut,.splash-nut-hole,.splash-road,.splash-wordmark,.splash-tagline,.splash-loader,.splash-loader i{animation:none!important;opacity:1;transform:none;stroke-dashoffset:0}}
+
+/* Simple 3-second intro using the original DriveNut logo */
+.brand-splash{background:#123d30;transition:opacity .25s ease,visibility .25s ease}
+.brand-splash:before,.brand-splash:after{display:none}
+.splash-original-brand{position:relative;z-index:1;display:flex;align-items:center;gap:13px}
+.splash-original-brand .brand-mark{display:grid;place-items:center;width:58px;height:58px;border-radius:17px;background:#d7f17a;color:#123b2d;font:900 34px Manrope,sans-serif;box-shadow:0 8px 22px #0003}
+.splash-original-name{display:flex;flex-direction:column;color:#fff;font:800 34px/1.05 Manrope,"DM Sans",sans-serif;letter-spacing:-1.5px}
+.splash-original-name>span{display:inline}
+.splash-original-name>span span{color:#d7f17a}
+.splash-original-name small{margin-top:7px;color:#c2d7c7;font:700 8px "DM Sans",sans-serif;letter-spacing:2px}
+@media(max-width:420px){.splash-original-brand .brand-mark{width:50px;height:50px;font-size:30px}.splash-original-name{font-size:29px}}
