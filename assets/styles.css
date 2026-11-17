@@ -186,3 +186,21 @@ body{background:#eef3ee}
 
 /* Account deletion controls */
 .account-danger-zone{margin-top:22px;padding:16px;border:1px solid #f0d8d4;border-radius:14px;background:#fff8f7}.account-danger-zone b{color:#963b32;font-size:13px}.account-danger-zone p{font-size:12px;color:#78635f;line-height:1.55}.danger-outline,.danger-button{border:1px solid #b84b40;border-radius:10px;padding:10px 14px;font:700 12px inherit;cursor:pointer}.danger-outline{background:#fff;color:#a53d34}.danger-button{background:#a53d34;color:#fff}.danger-button:disabled{opacity:.45;cursor:not-allowed}.danger-outline:hover,.danger-button:not(:disabled):hover{filter:brightness(.95)}
+
+
+/* Delivery rider workspace */
+.hero-platforms{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px;position:relative;z-index:1}
+.hero-platforms span{font-size:9px;font-weight:800;letter-spacing:.3px;color:#eff8e9;background:#ffffff18;border:1px solid #ffffff30;border-radius:30px;padding:6px 10px}
+.rider-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.rider-tool{display:flex;align-items:center;gap:11px;text-align:left;min-width:0;padding:15px 13px;background:#fff;border:1px solid #e1eae0;border-radius:16px;box-shadow:0 7px 20px #183b2b09;cursor:pointer;color:#1b3e2e}
+.rider-tool:hover{border-color:#b9d0ad;transform:translateY(-2px);box-shadow:0 11px 25px #183b2b12}
+.tool-icon{display:grid;place-items:center;flex:0 0 36px;height:36px;border-radius:11px;background:#edf5e7;color:#285b3e;font-size:19px;font-weight:800}
+.rider-tool>span:nth-child(2){display:flex;flex-direction:column;gap:4px;min-width:0}
+.rider-tool b{font-size:11px;line-height:1.35}.rider-tool small{font-size:9px;line-height:1.45;color:#77867a}
+.tool-arrow{margin-left:auto;color:#75945b;font-size:17px}
+.rider-how{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:13px 15px;margin-bottom:22px;border:1px solid #e0e9dc;border-radius:14px;background:#f8fbf6;color:#526756;font-size:10px}
+.rider-how>b{color:#1e4935;font-size:11px;margin-right:5px}.rider-how>i{font-style:normal;color:#9aae8c}
+.rider-how small{flex-basis:100%;font-size:9px;color:#829087;line-height:1.5}
+.composer-prompt{font-size:11px}
+@media(max-width:850px){.rider-tools{grid-template-columns:1fr;gap:9px}.rider-tool{padding:12px 13px}.tool-icon{flex-basis:34px;height:34px}.rider-how{gap:7px;margin-bottom:18px}}
+@media(max-width:520px){.hero-platforms{margin-top:12px}.rider-tool b{font-size:10px}.rider-tool small{font-size:9px}.rider-how{font-size:9px;padding:11px 12px}}
